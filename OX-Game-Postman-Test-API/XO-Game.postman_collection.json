@@ -1,0 +1,513 @@
+{
+	"info": {
+		"_postman_id": "062ee0c1-9510-48ae-a241-031d64dae85f",
+		"name": "XO Game",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "StartGame",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c2cfd2d-960a-46ec-a1b6-de55aa7e253e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Player1 is Noom\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.player1).to.eql(\"noom\");",
+							"});",
+							"",
+							"pm.test(\"Player2 is Nut\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.player2).to.eql(\"nut\");",
+							"});",
+							"",
+							"pm.test(\"Player1 is Noom is O\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.player1Status).to.eql(\"O\");",
+							"});",
+							"",
+							"pm.test(\"Player1 is Nut is X\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.player2Status).to.eql(\"X\");",
+							"});",
+							"",
+							"pm.test(\"Round is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.round).to.eql(\"1\");",
+							"});",
+							"",
+							"pm.test(\"Table Size is 9\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.table).to.eql(9);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"player1\":\"noom\",\n\t\"player2\":\"nut\",\n\t\"player1Status\":\"O\",\n\t\"player2Status\":\"X\",\n\t\"table\":9\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/startGame",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"startGame"
+					],
+					"query": [
+						{
+							"key": "player1",
+							"value": "noom",
+							"disabled": true
+						},
+						{
+							"key": "player2",
+							"value": "nut",
+							"disabled": true
+						},
+						{
+							"key": "player1Status",
+							"value": "O",
+							"disabled": true
+						},
+						{
+							"key": "player2Status",
+							"value": "X",
+							"disabled": true
+						},
+						{
+							"key": "table",
+							"value": "9",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "round1 Turn O position 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea07082a-3874-4c74-a856-a5a0d128d335",
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Player Name is Noom\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.playerName).to.eql(\"noom\");",
+							"});",
+							"",
+							"pm.test(\"Player Status is O\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.playerStatus).to.eql(\"O\");",
+							"});",
+							"",
+							"pm.test(\"Position is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.position).to.eql(1);",
+							"});",
+							"",
+							"pm.test(\"Round is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.round).to.eql(1);",
+							"});",
+							"",
+							"pm.test(\"Score Player 1 is 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.scoreP1).to.eql(0);",
+							"});",
+							"",
+							"pm.test(\"Score Player 2 is 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.scoreP2).to.eql(0);",
+							"});",
+							"",
+							"pm.test(\"Winner\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.winner).to.eql(\"\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playerName\":\"noom\",\n\t\"playerStatus\":\"O\",\n\t\"position\":\"1\",\n\t\"round\":1,\n\t\"scoreP1\":0,\n\t\"scoreP2\":0\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/startGame/play",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"startGame",
+						"play"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "round1 Turn X position 8",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "626f2ca8-e92d-46ee-a125-19a2cdd3a693",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Player Name is Nut\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.playerName).to.eql(\"nut\");",
+							"});",
+							"",
+							"pm.test(\"Player Status is X\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.playerStatus).to.eql(\"X\");",
+							"});",
+							"",
+							"pm.test(\"Position is 8\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.position).to.eql(8);",
+							"});",
+							"",
+							"pm.test(\"Round is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.round).to.eql(1);",
+							"});",
+							"",
+							"pm.test(\"Score Player 1 is 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.scoreP1).to.eql(0);",
+							"});",
+							"",
+							"pm.test(\"Score Player 2 is 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.scoreP2).to.eql(0);",
+							"});",
+							"",
+							"pm.test(\"Winner\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.winner).to.eql(\"\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playerName\":\"nut\",\n\t\"playerStatus\":\"X\",\n\t\"position\":\"8\",\n\t\"round\":1,\n\t\"scoreP1\":0,\n\t\"scoreP2\":0\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/startGame/play",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"startGame",
+						"play"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "round1 Turn O position 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c73b308c-0be8-4a5c-bfe0-0d284eb3650b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Player Name is Noom\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.playerName).to.eql(\"noom\");",
+							"});",
+							"",
+							"pm.test(\"Player Status is O\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.playerStatus).to.eql(\"O\");",
+							"});",
+							"",
+							"pm.test(\"Position is 2\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.position).to.eql(2);",
+							"});",
+							"",
+							"pm.test(\"Round is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.round).to.eql(1);",
+							"});",
+							"",
+							"pm.test(\"Score Player 1 is 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.scoreP1).to.eql(0);",
+							"});",
+							"",
+							"pm.test(\"Score Player 2 is 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.scoreP2).to.eql(0);",
+							"});",
+							"",
+							"pm.test(\"Winner\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.winner).to.eql(\"\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playerName\":\"noom\",\n\t\"playerStatus\":\"O\",\n\t\"position\":\"2\",\n\t\"round\":1,\n\t\"scoreP1\":0,\n\t\"scoreP2\":0\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/startGame/play",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"startGame",
+						"play"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "round1 Turn X position 7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7f84fc7c-1fe2-41a2-b4a6-cca21bcac16f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Player Name is Nut\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.playerName).to.eql(\"nut\");",
+							"});",
+							"",
+							"pm.test(\"Player Status is X\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.playerStatus).to.eql(\"X\");",
+							"});",
+							"",
+							"pm.test(\"Position is 7\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.position).to.eql(7);",
+							"});",
+							"",
+							"pm.test(\"Round is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.round).to.eql(1);",
+							"});",
+							"",
+							"pm.test(\"Score Player 1 is 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.scoreP1).to.eql(0);",
+							"});",
+							"",
+							"pm.test(\"Score Player 2 is 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.scoreP2).to.eql(0);",
+							"});",
+							"",
+							"pm.test(\"Winner\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.winner).to.eql(\"\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playerName\":\"nut\",\n\t\"playerStatus\":\"X\",\n\t\"position\":\"7\",\n\t\"round\":1,\n\t\"scoreP1\":0,\n\t\"scoreP2\":0\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/startGame/play",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"startGame",
+						"play"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "round1 Turn O position 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f49f5ff7-7e61-490c-b570-316d87e505e7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Player Name is Noom\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.playerName).to.eql(\"noom\");",
+							"});",
+							"",
+							"pm.test(\"Player Status is O\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.playerStatus).to.eql(\"O\");",
+							"});",
+							"",
+							"pm.test(\"Position is 3\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.position).to.eql(3);",
+							"});",
+							"",
+							"pm.test(\"Round is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.round).to.eql(1);",
+							"});",
+							"",
+							"pm.test(\"Score Player 1 is 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.scoreP1).to.eql(1);",
+							"});",
+							"",
+							"pm.test(\"Score Player 2 is 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.scoreP2).to.eql(0);",
+							"});",
+							"",
+							"pm.test(\"Winner\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.winner).to.eql(\"O Win\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playerName\":\"noom\",\n\t\"playerStatus\":\"O\",\n\t\"position\":\"3\",\n\t\"round\":1,\n\t\"scoreP1\":0,\n\t\"scoreP2\":0\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/startGame/play",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"startGame",
+						"play"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

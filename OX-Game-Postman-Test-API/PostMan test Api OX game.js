@@ -116,3 +116,7 @@ pm.test("playerScore is 0", function () {
     var jsonData = pm.response.json();
     pm.expect(jsonData.playerPositio).to.eql("0");
 });
+
+
+
+//newman run namefile json exported
